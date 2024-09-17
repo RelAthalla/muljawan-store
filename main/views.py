@@ -9,9 +9,8 @@ def show_main(request):
     product_entries = ProductEntry.objects.all()
     
     context = {
-        'name' : 'Barbell',
-        'price': 'Rp100.000',
-        'description': 'For training purposes',
+        'name' : 'Farrel Athalla Muljawan',
+        'class': 'E',
         'product': product_entries
     }
 
