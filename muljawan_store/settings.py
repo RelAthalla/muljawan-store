@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-l4@e58z(g%cn*hczp@$gw-n+!ap#mkv#wh%kzxg2#^@-wmv19e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1","farrel-athalla-muljawanstoredua.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","farrel-athalla-muljawanstoredua.pbp.cs.ui.ac.id",
+                 "farrel-athalla-muljawanstore.pbp.cs.ui.ac.id"]
 
 
 # Application definition
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'muljawan_store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +123,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://http://farrel-athalla-muljawanstore.pbp.cs.ui.ac.id/", "https://http://farrel-athalla-muljawanstore.pbp.cs.ui.ac.id/"]

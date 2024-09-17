@@ -1,21 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to muljawan store</title>
-</head>
-<body>
-    <h1>Muljawan Store</h1>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Main Page</h1>
 
-    <h5>Name: </h5>
-    <p>{{ name }}<p>
-    <h5>Price: </h5>
-    <p>{{ price }}<p>
-    <h5>Quantity: </h5>
-    <p>{{ quantity }}</p>
-    <h5>Description: </h5>
-    <p>{{ description }}<p>    
-</body>
-</html>
+<h5>Name: </h5>
+<p>{{ name }}<p>
 
+<h5>Price: </h5>
+<p>{{ price }}<p>
+
+<h5>Quantity: </h5>
+<p>{{ quantity }}</p>
+
+<h5>Description: </h5>
+<p>{{ description }}<p>
+
+...
+{% if not product_entries %}
+<p>Belum ada data produk pada muljawan store.</p>
+{% else %}
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Time</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini 
+    {% endcomment %} 
+    {% for product_entry in product_entries %}
+    <tr>
+        <td>{{product_entry.name}}</td>
+        <td>{{product_entry.price}}</td>
+        <td>{{product_entry.description}}</td>
+        <td>{{product_entry.quantity}}</td>
+        <td>{{product_entry.time}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product_entry' %}">
+    <button>Add New Product Entry</button>
+</a>
+
+{% endblock content %}
