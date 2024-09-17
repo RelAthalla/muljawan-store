@@ -25,11 +25,11 @@
     {% endcomment %} 
     {% for product_entry in product %}
     <tr>
-        <td>{{product.name}}</td>
-        <td>{{product.price}}</td>
-        <td>{{product.description}}</td>
-        <td>{{product.quantity}}</td>
-        <td>{{product.time}}</td>
+        <td>{{product_entry.name}}</td>
+        <td>{{product_entry.price}}</td>
+        <td>{{product_entry.description}}</td>
+        <td>{{product_entry.quantity}}</td>
+        <td>{{product_entry.time}}</td>
     </tr>
     {% endfor %}
 </table>
