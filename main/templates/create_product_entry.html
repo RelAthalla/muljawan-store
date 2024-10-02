@@ -1,18 +1,82 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h1>Add New Product Entry</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Create Product - Medieval Style</title>
+{% endblock meta %}
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Product Entry" />
-      </td>
-    </tr>
-  </table>
-</form>
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="flex flex-col min-h-screen bg-pattern bg-cover">
+  <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+    <h1 class="text-4xl font-medieval text-center mb-8 text-gold">Create Product Entry</h1>
+  
+    <div class="bg-scroll-pattern shadow-lg border-4 border-gold rounded-lg p-6">
+      <form method="POST" class="space-y-6">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="flex flex-col">
+            <label for="{{ field.id_for_label }}" class="mb-2 font-bold text-dark-brown">
+              {{ field.label }}
+            </label>
+            <div class="w-full">
+              {{ field }}
+            </div>
+            {% if field.help_text %}
+              <p class="mt-1 text-sm text-brown">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div class="flex justify-center mt-6">
+          <button type="submit" class="bg-gold text-black font-bold px-6 py-3 rounded-lg hover:bg-dark-gold transition duration-300 ease-in-out w-full">
+            Create Product Entry
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<style>
+  .bg-pattern {
+    background-image: url('path-to-your-medieval-pattern.jpg'); /* Gambar dengan pola bergaya medieval */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .bg-scroll-pattern {
+    background-image: url('path-to-your-scroll-texture.jpg'); /* Gambar seperti kertas atau gulungan */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Warna dan font untuk tema medieval */
+  .text-gold {
+    color: #c3a437; /* Warna emas */
+  }
+  
+  .text-dark-brown {
+    color: #4b3621; /* Warna cokelat gelap */
+  }
+  
+  .bg-gold {
+    background-color: #c3a437; /* Latar belakang emas */
+  }
+  
+  .hover\:bg-dark-gold:hover {
+    background-color: #a68a32; /* Warna emas lebih gelap saat hover */
+  }
+  
+  .font-medieval {
+    font-family: 'Uncial Antiqua', serif; /* Gunakan font medieval seperti Uncial atau Old English */
+  }
+  
+  /* Border emas untuk menambah sentuhan klasik */
+  .border-gold {
+    border-color: #c3a437;
+  }
+</style>
 
 {% endblock %}

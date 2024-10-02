@@ -5,28 +5,77 @@
 {% endblock meta %}
 
 {% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-700 via-gray-900 to-black py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h2 class="mt-6 text-center text-4xl font-extrabold text-gold font-medieval">
+        Create Your Journey
+      </h2>
+      <p class="text-center text-gray-400 italic mt-2">Forge your path into the kingdom</p>
+    </div>
+    <form class="mt-8 space-y-6" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="remember" value="true">
+      <div class="rounded-md shadow-lg border-2 border-gold p-6 bg-gray-800">
+        {% for field in form %}
+          <div class="{% if not forloop.first %}mt-4{% endif %}">
+            <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gold font-medieval">
+              {{ field.label }}
+            </label>
+            <div class="relative">
+              {{ field }}
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                {% if field.errors %}
+                  <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                {% endif %}
+              </div>
+            </div>
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
 
-<div class="login">
-  <h1>Register</h1>
+      <div>
+        <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-bold rounded-md text-black bg-gold hover:bg-gold-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold font-medieval">
+          Register for the Kingdom
+        </button>
+      </div>
+    </form>
 
-  <form method="POST">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input type="submit" name="submit" value="Daftar" /></td>
-      </tr>
-    </table>
-  </form>
+    {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+      <div class="bg-red-200 border border-red-600 text-red-900 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ message }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+    <div class="text-center mt-6">
+      <p class="text-sm text-gray-300">
+        Already sworn your oath?
+        <a href="{% url 'main:login' %}" class="font-medium text-gold hover:text-gold-dark font-medieval">
+          Login Here
+        </a>
+      </p>
+    </div>
+  </div>
 </div>
 
+<style>
+  .text-gold { color: #d4af37; }
+  .bg-gold { background-color: #d4af37; }
+  .bg-gold-dark { background-color: #b8972b; }
+  .font-medieval { font-family: 'UnifrakturMaguntia', cursive; }
+  .border-gold { border-color: #d4af37; }
+  .focus:ring-gold { --tw-ring-color: #d4af37; }
+  .focus:border-gold { border-color: #d4af37; }
+</style>
 {% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Edit Product - Medieval Theme</title>
+{% endblock meta %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="flex flex-col min-h-screen bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400">
+    <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gold font-medieval">Edit Product Entry</h1>
+
+        <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-gold form-style">
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="flex flex-col">
+                        <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-800 text-medieval">
+                            {{ field.label }}
+                        </label>
+                        <div class="w-full">
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="bg-gold-dark text-black font-bold py-3 px-6 rounded-lg hover:bg-red-700 hover:text-white transition duration-300 ease-in-out w-full border-2 border-red-900 shadow-md">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+  .font-medieval {
+      font-family: 'UnifrakturMaguntia', cursive;
+  }
+
+  .text-gold {
+      color: #d4af37;
+  }
+
+  .bg-gold-dark {
+      background-color: #b8972b;
+  }
+
+  .border-gold {
+      border-color: #d4af37;
+  }
+
+  .form-style {
+      background: #f8f4e3;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+  }
+</style>
+{% endblock %}
