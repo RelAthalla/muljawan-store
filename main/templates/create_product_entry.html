@@ -1,81 +1,71 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block meta %}
-<title>Create Product - Medieval Style</title>
+<title>Create Product</title>
 {% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
-<div class="flex flex-col min-h-screen bg-pattern bg-cover">
-  <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
-    <h1 class="text-4xl font-medieval text-center mb-8 text-gold">Create Product Entry</h1>
-  
-    <div class="bg-scroll-pattern shadow-lg border-4 border-gold rounded-lg p-6">
-      <form method="POST" class="space-y-6">
-        {% csrf_token %}
-        {% for field in form %}
-          <div class="flex flex-col">
-            <label for="{{ field.id_for_label }}" class="mb-2 font-bold text-dark-brown">
-              {{ field.label }}
-            </label>
-            <div class="w-full">
-              {{ field }}
-            </div>
-            {% if field.help_text %}
-              <p class="mt-1 text-sm text-brown">{{ field.help_text }}</p>
-            {% endif %}
-            {% for error in field.errors %}
-              <p class="mt-1 text-sm text-red-600">{{ error }}</p>
-            {% endfor %}
-          </div>
-        {% endfor %}
-        <div class="flex justify-center mt-6">
-          <button type="submit" class="bg-gold text-black font-bold px-6 py-3 rounded-lg hover:bg-dark-gold transition duration-300 ease-in-out w-full">
-            Create Product Entry
-          </button>
+<div class="flex flex-col min-h-screen bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400 bg-picture">
+    <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gold font-medieval">Create Product Entry</h1>
+
+        <div class="bg-white rounded-lg p-6 shadow-lg border-2 border-gold form-style">
+            <form method="POST" class="space-y-6">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="flex flex-col">
+                        <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-800 text-medieval">
+                            {{ field.label }}
+                        </label>
+                        <div class="w-full">
+                            {{ field }}
+                        </div>
+                        {% if field.help_text %}
+                            <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="bg-gold-dark text-black font-bold py-3 px-6 rounded-lg hover:bg-red-700 hover:text-white transition duration-300 ease-in-out w-full border-2 border-red-900 shadow-md">
+                        Create Product Entry
+                    </button>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </div>
 <style>
-  .bg-pattern {
-    background-image: url('path-to-your-medieval-pattern.jpg'); /* Gambar dengan pola bergaya medieval */
-    background-size: cover;
-    background-position: center;
+  .bg-picture {
+      background-image: url("{% static 'image/Tavern4K.jpg' %}"); 
+      background-size: cover;
+      background-position: center;
   }
-  
-  .bg-scroll-pattern {
-    background-image: url('path-to-your-scroll-texture.jpg'); /* Gambar seperti kertas atau gulungan */
-    background-size: cover;
-    background-position: center;
-  }
-  
-  /* Warna dan font untuk tema medieval */
-  .text-gold {
-    color: #c3a437; /* Warna emas */
-  }
-  
-  .text-dark-brown {
-    color: #4b3621; /* Warna cokelat gelap */
-  }
-  
-  .bg-gold {
-    background-color: #c3a437; /* Latar belakang emas */
-  }
-  
-  .hover\:bg-dark-gold:hover {
-    background-color: #a68a32; /* Warna emas lebih gelap saat hover */
-  }
-  
   .font-medieval {
-    font-family: 'Uncial Antiqua', serif; /* Gunakan font medieval seperti Uncial atau Old English */
+      font-family: 'UnifrakturMaguntia', cursive;
   }
-  
-  /* Border emas untuk menambah sentuhan klasik */
+
+  .text-gold {
+      color: #d4af37;
+  }
+
+  .bg-gold-dark {
+      background-color: #b8972b;
+  }
+
   .border-gold {
-    border-color: #c3a437;
+      border-color: #d4af37;
+  }
+
+  .form-style {
+      background: #f8f4e3;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
   }
 </style>
 

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Edit Product - Medieval Theme</title>
+<title>Edit Product</title>
 {% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
-<div class="flex flex-col min-h-screen bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400">
+<div class="flex flex-col min-h-screen bg-gradient-to-b from-gray-200 via-gray-300 to-gray-400 bg-picture">
     <div class="container mx-auto px-4 py-8 mt-16 max-w-xl">
         <h1 class="text-4xl font-bold text-center mb-8 text-gold font-medieval">Edit Product Entry</h1>
 
@@ -40,6 +40,11 @@
     </div>
 </div>
 <style>
+  .bg-picture {
+      background-image: url("{% static 'image/Tavern4K.jpg' %}"); 
+      background-size: cover;
+      background-position: center;
+  }
   .font-medieval {
       font-family: 'UnifrakturMaguntia', cursive;
   }

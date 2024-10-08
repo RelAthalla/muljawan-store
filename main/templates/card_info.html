@@ -1,3 +1,4 @@
+{% load static %}
 <div class="bg-paper-pattern rounded-xl overflow-hidden border-4 border-gold shadow-xl medieval-border">
     <div class="p-6">
       <h5 class="text-xl font-bold text-dark-gold font-medieval">{{ title }}</h5>
@@ -6,7 +7,7 @@
 </div>
 <style>
     .bg-paper-pattern {
-        background-image: url('path-to-your-texture.jpg'); /* gunakan gambar tekstur kertas tua */
+        background-image: url("{% static 'image/OldPaper.jpeg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -17,7 +18,7 @@
     }
     
     .text-dark-gold {
-        color: #b08d2c;
+        color: #000000;
     }
     
     .text-brown {
@@ -25,7 +26,7 @@
     }
     
     .font-medieval {
-        font-family: 'Uncial Antiqua', serif; /* contoh font bergaya medieval, pastikan font ini di-load dari Google Fonts atau yang sesuai */
+        font-family: 'Uncial Antiqua', serif;
     }
     
     .shadow-xl {
@@ -33,6 +34,6 @@
     }
     
     .medieval-border {
-        border-image: url('path-to-your-decorative-border.png') 30; /* gunakan gambar bingkai dekoratif bergaya medieval */
+        border-image: url('path-to-your-decorative-border.png') 30; 
     }
 </style>

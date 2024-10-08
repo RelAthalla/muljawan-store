@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -24,7 +26,7 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
-
+    
 def register(request):
     form = UserCreationForm()
 
@@ -47,6 +49,8 @@ def login_user(request):
         response = HttpResponseRedirect(reverse("main:show_main"))
         response.set_cookie('last_login', str(datetime.datetime.now()))
         return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
 
    else:
       form = AuthenticationForm(request)
@@ -93,6 +97,24 @@ def delete_product(request, id):
     product.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    product = request.POST.get("product")
+    price = request.POST.get("price")
+    description = request.POST.get("description")
+    quantity = request.POST.get("quantity")
+    user = request.user
+
+    new_product = ProductEntry(
+        product=product, description=description,
+        quantity=quantity, price=price,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
 
 def show_xml(request):
     data = ProductEntry.objects.all()
