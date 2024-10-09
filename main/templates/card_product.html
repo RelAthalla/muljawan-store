@@ -1,30 +1,24 @@
 <div class="relative break-inside-avoid">
-  <!-- Elemen dekoratif seperti gulungan -->
   <div class="absolute top-2 z-10 left-1/2 -translate-x-1/2 flex items-center -space-x-2">
     <div class="w-[2rem] h-6 bg-brown-200 rounded-md opacity-80 -rotate-90"></div>
     <div class="w-[2rem] h-6 bg-brown-200 rounded-md opacity-80 -rotate-90"></div>
   </div>
 
-  <!-- Kartu produk dengan tema medieval -->
   <div class="relative top-5 bg-black bg-opacity-70 shadow-md rounded-lg mb-4 break-inside-avoid flex flex-col border-2 border-gold transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-xs">
     <div class="bg-black bg-opacity-50 text-brown p-3 rounded-t-lg border-b-2 border-gold">
-      <!-- Adding mini background for product_entry.name -->
       <h3 class="font-bold text-lg mb-1 text-gold bg-white p-1 px-2 rounded-full inline-block">{{product_entry.name}}</h3>
     </div>
     <div class="p-3">
-      <!-- Adding mini background for product_entry.price -->
       <p class="font-bold text-md mb-1 text-white">Price</p>
       <p class="text-black-300 mb-1">
         <span class="bg-white p-1 px-2 rounded-full inline-block">{{product_entry.price}}</span>
       </p>
 
-      <!-- Adding mini background for product_entry.description -->
       <p class="font-bold text-md mb-1 text-white">Description</p>
       <p class="text-black-300 mb-1">
         <span class="bg-white p-1 px-2 rounded-full inline-block">{{product_entry.description}}</span>
       </p>
 
-      <!-- Adding mini background for product_entry.quantity -->
       <p class="font-bold text-md mb-1 text-white">Quantity</p>
       <p class="text-black-300 mb-1">
         <span class="bg-white p-1 px-2 rounded-full inline-block">{{product_entry.quantity}}</span>
@@ -32,16 +26,13 @@
     </div>
   </div>
 
-  <!-- Tombol edit dan delete dengan tema medieval -->
   <div class="absolute top-5 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-1">
-    <!-- Edit Button -->
     <a href="{% url 'main:edit_product' product_entry.pk %}" class="bg-gold hover:bg-gold-dark text-black rounded-full p-1 transition duration-300 shadow-md border-2 border-black">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
       </svg>
     </a>
 
-    <!-- Delete Button -->
     <a href="{% url 'main:delete_product' product_entry.pk %}" class="bg-red-700 hover:bg-red-800 text-white rounded-full p-1 transition duration-300 shadow-md border-2 border-black">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />

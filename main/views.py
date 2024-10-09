@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse
+from django.utils.html import strip_tags
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -15,14 +16,12 @@ from django.core import serializers
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    product_entries = ProductEntry.objects.filter(user=request.user)
     
     context = {
         'name' : request.user.username,
         'class': 'E',
         'npm': '2306223925',
-        'product': product_entries,
-        'last_login': request.COOKIES['last_login'],
+        # 'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, "main.html", context)
@@ -101,14 +100,16 @@ def delete_product(request, id):
 @csrf_exempt
 @require_POST
 def add_product_entry_ajax(request):
-    product = request.POST.get("product")
+    name = strip_tags(request.POST.get("name"))
+    description = strip_tags(request.POST.get("description")) 
+    name = request.POST.get("name")
     price = request.POST.get("price")
     description = request.POST.get("description")
     quantity = request.POST.get("quantity")
     user = request.user
 
     new_product = ProductEntry(
-        product=product, description=description,
+        name=name, description=description, 
         quantity=quantity, price=price,
         user=user
     )
@@ -117,11 +118,11 @@ def add_product_entry_ajax(request):
     return HttpResponse(b"CREATED", status=201)
 
 def show_xml(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
